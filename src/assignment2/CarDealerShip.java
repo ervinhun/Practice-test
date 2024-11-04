@@ -5,8 +5,7 @@
  */
 package assignment2;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -27,8 +26,8 @@ public class CarDealerShip
      */
     public void addCarForSale(Car car)
     {
-        //TODO Implement this method
-        throw new UnsupportedOperationException();
+        if (car != null && car.getPrice() > 0)
+            carsForSale.add(car);
     }
     
     /**
@@ -37,8 +36,10 @@ public class CarDealerShip
      */
     public double getTotalCarValues()
     {
-        //TODO Implement this method
-        throw new UnsupportedOperationException();
+        double price = 0;
+        for (Car car : carsForSale)
+            price += car.getPrice();
+        return price;
     }
     
     /**
@@ -47,8 +48,19 @@ public class CarDealerShip
      */
     public Car getCheapestCar()
     {
-        //TODO Implement this method
-        throw new UnsupportedOperationException();
+        double cheapestPrice = -1;
+        Car carToReturn = null;
+        for (Car car : carsForSale) {
+            if (cheapestPrice == -1){
+                cheapestPrice = car.getPrice();
+                carToReturn = car;
+            }
+            else if (car.getPrice() < cheapestPrice) {
+                cheapestPrice = car.getPrice();
+                carToReturn = car;
+            }
+        }
+        return carToReturn;
     }
     
     /**
@@ -57,8 +69,7 @@ public class CarDealerShip
      */
     public void sellCar(Car car)
     {
-        //TODO Implement this method
-        throw new UnsupportedOperationException();
+        carsForSale.remove(car);
     }
 
     /**
@@ -67,7 +78,6 @@ public class CarDealerShip
      */
     public List<Car> getCarsForSale()
     {
-        //TODO Implement this method
         return carsForSale;
     }
         
@@ -76,8 +86,20 @@ public class CarDealerShip
     */    
     public void sortCarsByPrice()
     {
-        //TODO Implement this method
-        throw new UnsupportedOperationException();
+        /**List<Double> prices = new ArrayList<>();
+        for (Car car : carsForSale)
+            prices.add(car.getPrice());
+        List<Car> carsOrderedByPrice = new ArrayList<>();
+
+        Collections.sort(prices);
+        for (int i = 0; i < prices.size(); i++)
+            for (Car car : carsForSale)
+                if (car.getPrice() == prices.get(i))
+                    carsOrderedByPrice.add(car);
+        if (carsOrderedByPrice.size() == carsForSale.size())
+            carsForSale = carsOrderedByPrice;*/
+
+        carsForSale.sort((o1, o2) -> (int)(o1.getPrice()-o2.getPrice()));
     }
     
     /**
@@ -85,8 +107,20 @@ public class CarDealerShip
     */    
     public void sortCarsByMaxSpeed()
     {
-        //TODO Implement this method
-        throw new UnsupportedOperationException();
+       /** List<Integer> speed = new ArrayList<>();
+        for (Car car : carsForSale)
+            speed.add(car.getMaxKilometersPerHour());
+        List<Car> carsOrderedBySpeed = new ArrayList<>();
+
+        Collections.sort(speed);
+        for (int i = 0; i < speed.size(); i++)
+            for (Car car : carsForSale)
+                if (car.getMaxKilometersPerHour() == speed.get(i))
+                    carsOrderedBySpeed.add(car);
+        if (carsOrderedBySpeed.size() == carsForSale.size())
+            carsForSale = carsOrderedBySpeed;*/
+
+        carsForSale.sort(Comparator.comparing(Car::getMaxKilometersPerHour));
     }
     
     /**
@@ -95,8 +129,8 @@ public class CarDealerShip
      */
     public Car presentRandomCarToCustomer()
     {
-        //TODO Implement this method
-        throw new UnsupportedOperationException();
+        Random random = new Random();
+        return carsForSale.get(random.nextInt(carsForSale.size()));
     }
 
 }

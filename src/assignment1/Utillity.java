@@ -20,8 +20,10 @@ public class Utillity {
      * @return True if 'input' ends with 'end'.
      */
     public boolean doesInputEndWithEnd(String input, String end) {
-        //TODO Implement this method
-        throw new UnsupportedOperationException();
+        /**String[] lastWord = input.split(" ");
+        int size = lastWord.length;
+        return lastWord[size - 1].equals(end);*/
+        return input.endsWith(end);
     }
 
     /**
@@ -32,8 +34,7 @@ public class Utillity {
      * @return should return something like "HELLO WORLD" for the example parameter above
      */
     public String allCapitalsAndNoWhiteSpace(String aString) {
-        //TODO Implement this method
-        throw new UnsupportedOperationException();
+        return aString.toUpperCase().trim();
     }
 
 }
